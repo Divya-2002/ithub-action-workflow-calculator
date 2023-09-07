@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - master  # Update to match your main branch name
 
 jobs:
   deploy:
@@ -24,9 +24,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "abhijaychaudhary8@gmil.com"
+          git config --global user.name "abhijeetpoonia"
+
       - name: Deploy
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}  
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}  # Create a GitHub secret called NPM_TOKEN with your npm authentication token
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
           npm run deploy
