@@ -24,13 +24,20 @@ jobs:
       - name: Configure Git Identity
         run: |
           git config --global user.email "abhijaychaudhary8@gmail.com"
-          git config --global user.name "Abhijeet Singh"
+          git config --global user.name "abhijeet singh"
 
       - name: Deploy Application
         run: npm run deploy
+        env:
+          GH_TOKEN: ${{ secrets.SAF }}
+
+      - name: List Directory Contents
+        run: ls -la
 
       - name: Deploy to GitHub Pages
         run: |
+          git config --global user.email "abhijaychaudhary8@gmail.com"
+          git config --global user.name "Abhijeet Singh"
           git checkout --orphan gh-pages
           git rm -rf .
           mv dist/* .
@@ -40,5 +47,4 @@ jobs:
           git push origin gh-pages --force
         env:
           CI: true
-          GH_TOKEN: ${{ secrets.SAF }}
 
