@@ -30,6 +30,9 @@ jobs:
         run: npm run deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN_USERNAME: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN_PASSWORD: ${{ secrets.GH_TOKEN }}
+
 
       - name: List Directory Contents
         run: ls -la
