@@ -1,3 +1,6 @@
+import * as React from 'react';
+
+
 import { memo } from "react";
 
 type Props = {

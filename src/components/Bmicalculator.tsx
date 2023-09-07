@@ -1,5 +1,7 @@
+import * as React from 'react';
+
 import { useMemo, useState } from 'react';
-import Slider from './Slider'
+import Slider from './Slider';
 import NumberInput from './NumberInput';
 
 const minHeight = 120;
@@ -29,8 +31,6 @@ const BmiCalculator = () => {
 
     const bmi = useMemo(() => calculateBmi(weight, height), [weight, height]);
 
-
-
     return (
         <>
             <div>
@@ -56,4 +56,5 @@ const BmiCalculator = () => {
     )
 }
 
-export default BmiCalculator
+export default BmiCalculator; // Export the component
+
