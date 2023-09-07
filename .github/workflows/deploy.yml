@@ -26,13 +26,14 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "abhijaychaudhary8@gmil.com"
-          git config --global user.name "abhijeetpoonia"
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          git config --global credential.helper store  # Store Git credentials
+          echo "https://github.com:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Deploy
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}  # Create a GitHub secret called NPM_TOKEN with your npm authentication token
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
           npm run deploy
+
 
