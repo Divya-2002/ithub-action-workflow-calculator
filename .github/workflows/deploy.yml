@@ -1,0 +1,37 @@
+name: Node.js App Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Configure Git
+        run: |
+         git config --global user.email "divyasharma1148kn@gmail.com"
+         git config --global user.name "Divya-2002"
+         git config --global credential.helper store  # Store Git credentials
+         echo "https://github.com:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+
+      - name: Deploy
+        run: |
+         npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+         npm run deploy
