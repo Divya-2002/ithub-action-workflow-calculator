@@ -1,37 +1,28 @@
-name: Node.js App Deployment
+name: Deploy to AWS
 
 on:
   push:
     branches:
-      - main
+      - main # Change this to match your branch name
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: self-hosted # Specify the label for your self-hosted runner
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the app
-        run: npm run build
-
-      - name: Configure Git
+      - name: Use Node.js 18 via nvm
         run: |
-         git config --global user.email "divyasharma1148kn@gmail.com"
-         git config --global user.name "Divya-2002"
-         git config --global credential.helper store  # Store Git credentials
-         echo "https://github.com:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-      - name: Deploy
+          nvm install 18
+          nvm use 18
+
+      - name: Install dependencies and build
         run: |
-         npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-         npm run deploy
+          npm install # Or yarn install, depending on your package manager
+ 
