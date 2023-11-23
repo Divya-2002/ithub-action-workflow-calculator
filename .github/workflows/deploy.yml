@@ -34,5 +34,5 @@ jobs:
           cd /home/ubuntu/actions-runner/_work/ithub-action-workflow-calculator/ithub-action-workflow-calculator &&
           npm install &&
           npm run build &&
-          nohup npm run dev &
+          nohup npm run dev > /dev/null 2>&1 & disown
           '
