@@ -22,4 +22,6 @@ jobs:
         run: |
           cd /home/ubuntu/actions-runner/_work/ithub-action-workflow-calculator/ithub-action-workflow-calculator
           npm install # Or yarn install, depending on your package manager
- 
+          npm run build 
+          npm run dev
+
