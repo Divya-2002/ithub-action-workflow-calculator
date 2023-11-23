@@ -22,6 +22,15 @@ jobs:
         run: |
           cd /home/ubuntu/actions-runner/_work/ithub-action-workflow-calculator/ithub-action-workflow-calculator
           npm install # Or yarn install, depending on your package manager
-          npm run build 
-          npm run dev
+     
+      - name: Deploy to AWS
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          HOSTNAME: ${{ secrets.HOST_IP }}
+          USER_NAME: ${{ secrets.HOST_USER }}
+        run: |
+          cd /home/ubuntu/actions-runner/_work/ithub-action-workflow-calculator/ithub-action-workflow-calculator &&
+          npm install &&
+          npm run build &&
+          nohup npm run dev &
 
