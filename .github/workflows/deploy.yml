@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
       - name: Install dependencies and build
         run: |
           cd /home/ubuntu/actions-runner/_work/ithub-action-workflow-calculator/ithub-action-workflow-calculator
