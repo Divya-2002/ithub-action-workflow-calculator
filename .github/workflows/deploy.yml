@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use Node.js 18 via nvm
-        run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-          source ~/.bashrc
-          nvm install 18
-  
-
       - name: Install dependencies and build
         run: |
           npm install # Or yarn install, depending on your package manager
